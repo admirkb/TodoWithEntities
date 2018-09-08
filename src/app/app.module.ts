@@ -7,12 +7,16 @@ import { TodoMachineComponent } from './todo-machine/todo-machine.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { todoReducer } from './store/reducers/todo.reducer';
+
 import { FormsModule } from '@angular/forms';
 
-const reducersObj = {
-  todoReducer: todoReducer,
-};
+import { reducers } from './store/reducers';
+import { TodoModule } from './todo.module';
+import { todoReducer } from './store/reducers/todo.reducer';
+
+// const reducersObj = {
+//   todoReducer: todoReducer,
+// };
 
 @NgModule({
   declarations: [
@@ -22,13 +26,15 @@ const reducersObj = {
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot(reducersObj),
+    StoreModule.forRoot(reducers),
     // StoreModule.forFeature(circlesReducer),
-    StoreDevtoolsModule,
+    // StoreDevtoolsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 80 //  Retains last 80 states
     }),
+    // StoreModule.forFeature('todo', todoReducer),
     EffectsModule.forRoot([]),
+    TodoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

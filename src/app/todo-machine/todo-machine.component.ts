@@ -3,6 +3,7 @@ import * as TodoActions from '../store/actions/todo.actions';
 import { Todo } from '../models/todo.model';
 import { UUID } from 'angular2-uuid';
 import { Store } from '@ngrx/store';
+import { selectAllTodos } from '../store/reducers';
 
 @Component({
   selector: 'app-todo-machine',
@@ -18,7 +19,7 @@ export class TodoMachineComponent implements OnInit {
   constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    this.todos$ = this.store.select('todoReducer');
+    this.todos$ = this.store.select(selectAllTodos);
   }
 
   addTodo(value) {
