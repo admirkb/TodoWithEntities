@@ -1,0 +1,23 @@
+<input placeholder="your todo" [(ngModel)]="todo">
+
+<button (click)="addTodo(todo)" [disabled]="!todo" *ngIf="!editing">
+  Add todo
+</button>
+
+<button (click)="updateTodo(todo)" *ngIf="editing">
+  Update
+</button>
+<button (click)="cancelEdit()" *ngIf="editing">
+  Cancel
+</button>
+
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">
+    {{todo.value}}
+    <span [class.done]="todo.done"></span>
+    <button (click)="editTodo(todo)">Edit</button>
+    <button (click)="toggleDone(todo)">Toggle Done</button>
+    <button (click)="deleteTodo(todo.id)">X</button>
+  </li>
+</ul>
